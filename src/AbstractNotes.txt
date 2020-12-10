@@ -1,0 +1,187 @@
+In this article, we will understand one of the most important pillar of OOPs
+i.e. Abstraction which refers to hide the internal implementation details.
+
+What is Abstraction in Java?
+Abstraction is the process of hiding the intenal implementaion details and show
+only what relevant to the user. Abstraction can be achieved either with abstract 
+classes or interfaces.
+
+The abstract keyword is a non-access modifier, used with classes and methods:
+
+Abstract Class in Java
+A class which is declared with the abstract keyword is known as a abstract class
+in Java.
+
+Key Points to Remember
+An abstract class can have abstract as well as non-abstract methods.(concrete methods)
+An abstract class can only have concrete methods but you need to provide its implementation,
+it is not necessary to have abstract method in it.
+An abstract class cannot be  instantiated means you cannot create object of an abstract class.
+but you can use it as a reference variable.
+It can have default constructors or  parametrized constructors to intialize its variables but 
+you need to provide parameter in the child class constructor which extend it using super()
+(will understand with an example).
+It can also have static methods in it.
+
+Example of abstract class(Point 1)
+//Java program to demonstrate abstract class
+// declare with abstract keyword to make 
+// it abstract class
+
+public abstract class AbstractExample {
+
+	// abstract method(can't define its implementation)
+	abstract void show();
+
+	// concrete method(user-defined)
+	void display() {
+		System.out.println("This is concrete method.");
+	}
+
+}
+
+Example of abstract class(Point 2)
+//Java program to demonstrate abstract class
+//can only have concrete method
+
+public abstract class AbstractExample {
+
+	// concrete method(user-defined)
+	void display() {
+		System.out.println("This is concrete method.");
+	}
+
+}
+Example of abstract class(Point 3)
+//Java program to demonstrate abstract class
+
+abstract class AbstractExample {
+
+	// abstract method(can't define its implementation)
+	abstract void show();
+
+	// concrete method(user-defined)
+	void display() {
+		System.out.println("This is concrete method.");
+	}
+
+}
+
+public class AbstractTest extends AbstractExample {
+
+	@Override
+	void show() {
+		System.out.println("Override show method in child class");
+
+	}
+
+	public static void main(String[] args) {
+		// can't make object of Abstract class
+		// this will throw compile-time error
+		// AstractExample ab = new AbstractExample();
+
+		// you can use it as a reference variable
+		AbstractExample abst = new AbstractTest();
+		abst.display();
+		abst.show();
+	}
+
+}
+
+Output: This is concrete method.
+        Override show method in child class
+
+Example of abstract class(Point 4 & 5)
+
+//Java program to demonstrate abstract class properties
+abstract class AbstractDemo {
+
+	int x;
+
+	// default constructor of abstract class
+	public AbstractDemo() {
+		System.out.println("Abstract class default constructor");
+	}
+
+	// parameterized constructor to initialize values
+	AbstractDemo(int x) {
+		this.x = x;
+	}
+
+	// concrete method with implementation
+	void display() {
+		System.out.println("Hello from concrete method in abstract class");
+	}
+
+	// static method
+	static void print() {
+		System.out.println("Hello from static method in abstract class");
+	}
+
+	// abstract method
+	abstract void hello();
+}
+
+// Child class extending Abstract class to 
+// provide implementation details to abstract method
+public class Test extends AbstractDemo {
+
+	// child class default constructor
+	Test() {
+		System.out.println("Test class default constructor");
+	}
+
+	// parameterized constructor
+	Test(int x) {
+		// using super to pass parameter for
+		// parameterized constructor in abstract class
+		super(x);
+	}
+
+	// provide implementation detail to abstract method
+	@Override
+	void hello() {
+		System.out.println("Override the abstract method in child class");
+	}
+
+	public static void main(String[] args) {
+		// child class reference and object of Test class
+		Test t = new Test();
+		// invoking concrete method using child class reference
+		t.display();
+		// invoking static method using child class reference
+		t.print();
+		// invoking abstract method using child class reference
+		t.hello();
+
+		// reference of abstract class and object of Test class
+		// passing parameter
+		AbstractDemo a = new Test(10);
+		System.out.println("Value of x  using abstract class reference " + a.x);
+		// invoking concrete method using abstract class reference
+		a.display();
+		// invoking static method using abstract class reference
+		a.print();
+		// invoking abstract method using abstract class reference
+		a.hello();
+		// you can also invoke static method using abstract class ClassName
+		AbstractDemo.print();
+
+	}
+
+}
+
+Output:
+Abstract class default constructor
+Test class default constructor
+Hello from concrete method in abstract class
+Hello from static method in abstract class
+Override the abstract method in child class
+Value of x  using abstract class reference 10
+Hello from concrete method in abstract class
+Hello from static method in abstract class
+Override the abstract method in child class
+Hello from static method in abstract class
+
+
+
